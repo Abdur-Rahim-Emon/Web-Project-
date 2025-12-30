@@ -13,22 +13,24 @@ The login has been using password hashing.
 - Payment module
 - Backend API integration
 - Database connectivity
+## Project Structure
 
-  Web-Project-/
+```text
+Web-Project-/
+├── Database/            # Database scripts and files
+├── backend/             # Backend logic (PHP / API)
+├── payment/             # Payment-related files
 │
-├── Database/          # Database scripts and files
-├── backend/           # Backend logic (PHP / API)
-├── payment/           # Payment-related files
+├── admin.html           # Admin dashboard page
+├── admin.css            # Admin styles
+├── admin.js             # Admin JavaScript logic
+├── driver.css           # Driver page styles
+├── busLogo.png          # Project images/assets
 │
-├── admin.html         # Admin dashboard page
-├── admin.css          # Admin styles
-├── admin.js           # Admin JavaScript logic
-│
-├── driver.css         # Driver page styles
-├── busLogo.png        # Project images/assets
-│
-├── README.md          # Project documentation
-├── README_backend.md  # Backend-specific documentation
+├── README.md            # Project documentation
+└── README_backend.md    # Backend-specific documentation
+```
+
 
 
 ---
