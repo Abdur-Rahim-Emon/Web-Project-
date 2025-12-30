@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Transport Automation - Login</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+
+<body>
+
+  <div class="page-shell">
+    <header class="hero-header">
+      <div>
+        <p class="eyebrow">Smart transit portal</p>
+        <h1 id="title">Bus Transport Automation</h1>
+        <p class="subtitle">Plan, book, and manage trips with a unified passenger and admin login.</p>
+      </div>
+      <button id="themeToggle" type="button" class="theme-toggle">Change theme</button>
+    </header>
+
+    <!-- Wrapper for centering container -->
+    <div class="wrapper">
+      <div class="container">
+        <!-- Logo -->
+        <img src="busLogo.png" alt="Bus Transport Automation" class="logo">
+
+        <!-- Heading -->
+        <h2>Welcome</h2>
+        <p class="lede">Login with your <strong>Bus Transport Automation</strong> account or as Admin</p>
+
+        <!-- Tabs for Passenger/Admin/Driver -->
+        <div class="tab">
+          <button id="userBtn" class="active" onclick="showUserLogin()">Passenger</button>
+          <button id="adminBtn" onclick="showAdminLogin()">Admin</button>
+          <button id="driverBtn" onclick="showDriverLogin()">Driver</button>
+        </div>
+
+        <!-- Passenger Login Form -->
+        <form id="userLogin" class="form active">
+          <label>Mobile Number </label>
+          <input type="text" placeholder="Enter mobile number" id="userMobile" required>
+
+          <label>Password </label>
+          <input type="password" placeholder="Enter password" id="userPassword" required>
+
+          <div class="actions">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">Log In</button>
+          <p class="signup-note">Don’t have an account? <a href="signup.html" onclick="signupUser()">Create Account</a></p>
+        </form>
+
+        <!-- Admin Login Form -->
+        <form id="adminLogin" class="form">
+          <label>Username </label>
+          <input type="text" placeholder="Enter admin username" id="adminUser" required>
+
+          <label>Password </label>
+          <input type="password" placeholder="Enter admin password" id="adminPass" required>
+
+          <button type="submit" class="login-btn">Log In</button>
+        </form>
+
+        <!-- Driver Login Form -->
+        <form id="driverLogin" class="form">
+          <label>Phone </label>
+          <input type="text" placeholder="Enter driver phone" id="driverPhone" required>
+
+          <label>License Number </label>
+          <input type="text" placeholder="Enter license number" id="driverLicense" required>
+
+          <button type="submit" class="login-btn">Log In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Script -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

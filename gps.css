@@ -1,0 +1,31 @@
+html,body{height:100%}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);margin:0;color:var(--text,#222);display:flex;flex-direction:column;min-height:100vh}
+.navbar{background:var(--primary);color:white;display:flex;justify-content:space-between;align-items:center;padding:12px 24px}
+.navbar .logo{font-weight:700}
+.navbar ul{margin:0;padding:0;list-style:none;display:flex}
+.navbar li{margin-left:18px}
+.navbar a{color:white;text-decoration:none}
+
+/* Full-bleed layout under navbar */
+.gps-container{flex:1;min-height:0;width:100%;margin:0;display:grid;grid-template-columns:1fr 360px;gap:0;padding:0}
+.map-wrapper{position:relative;background:#fff;padding:0;border-radius:0;box-shadow:none;min-height:0}
+.map{height:100%;width:100%;border-radius:0}
+.map-note{position:absolute;left:12px;bottom:12px;font-size:13px;color:var(--muted);background:rgba(255,255,255,0.92);padding:8px 10px;border-radius:10px;max-width:min(520px,calc(100% - 24px))}
+
+.info-panel{background:#fff;padding:18px;border-radius:0;box-shadow:none;overflow:auto;min-height:0}
+.info-panel h2{margin:0 0 8px;color:var(--primary)}
+.info-panel h3{margin-top:18px;color:var(--primary)}
+.status p{margin:6px 0}
+.stop-list{list-style:none;padding:0;margin:8px 0 0}
+.stop-list li{padding:8px;border-radius:8px;border:1px solid #d1ead1;margin-bottom:6px;background:#f3fff3}
+.stop-list li.active{background:#c5f0c5}
+.panel-actions{margin-top:20px}
+.back{display:inline-block;padding:10px 14px;background:var(--primary);color:white;text-decoration:none;border-radius:8px}
+
+footer{text-align:center;margin:20px auto 40px;color:var(--muted)}
+
+@media(max-width:900px){
+  .gps-container{grid-template-columns:1fr;grid-template-rows:55vh 1fr}
+  .info-panel{order:2}
+  .map-wrapper{order:1}
+}

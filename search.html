@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Search</title>
+  <link rel="stylesheet" href="search.css">
+    <script src="theme.js"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">Bus Transport Automation</div>
+    <nav class="topnav">
+      <a href="passenger.html">Dashboard</a>
+      <a href="#">Help</a>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="search-panel">
+      <form id="searchForm" class="search-form" autocomplete="off">
+        <div class="inputs">
+          <div class="input-group">
+            <label>From</label>
+            <input id="from" name="from" type="text" placeholder="City or stop (e.g., Dhaka)" required>
+            <div class="suggestions" id="from-suggest"></div>
+          </div>
+
+          <div class="input-group">
+            <label>To</label>
+            <input id="to" name="to" type="text" placeholder="City or stop (e.g., Chittagong)" required>
+            <div class="suggestions" id="to-suggest"></div>
+          </div>
+
+          <div class="input-group small">
+            <label>Date</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+
+          <div class="input-group small">
+            <label>Passengers</label>
+            <select id="pax">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Search Buses</button>
+          <button type="button" id="swapBtn" class="btn">Swap</button>
+        </div>
+      </form>
+
+      <div class="hint">Popular routes: Dhaka → Chittagong · Dhaka → Sylhet · Dhaka → Rajshahi</div>
+    </section>
+
+    <aside class="filters">
+      <div class="filter-block">
+        <h4>Filters</h4>
+        <label><input type="checkbox" class="filter-operator" value="BlueLine Express" checked> BlueLine Express</label>
+        <label><input type="checkbox" class="filter-operator" value="CityLink" checked> CityLink</label>
+        <label><input type="checkbox" class="filter-operator" value="RapidTrans" checked> RapidTrans</label>
+      </div>
+
+      <div class="filter-block">
+        <h4>Sort</h4>
+        <select id="sortSelect">
+          <option value="best">Best Match</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="time_earliest">Earliest Departure</option>
+        </select>
+      </div>
+    </aside>
+
+    <section id="results" class="results">
+      <div class="results-header"><h2>Available Buses</h2><div id="results-count"></div></div>
+      <div id="results-list"></div>
+    </section>
+      <!-- Seat Selection Modal -->
+      <div id="seatModal" class="seat-modal" aria-hidden="true">
+        <div class="seat-modal-content">
+          <button class="seat-modal-close" id="seatModalClose" aria-label="Close">×</button>
+          <h2 id="seatModalTitle">Select Seats</h2>
+          <div class="seat-legend">
+            <span class="legend-item"><span class="seat-box available"></span> Available</span>
+            <span class="legend-item"><span class="seat-box selected"></span> Selected</span>
+            <span class="legend-item"><span class="seat-box booked"></span> Booked</span>
+            <span class="legend-item"><span class="seat-box premium"></span> Premium</span>
+            <span class="legend-item"><span class="seat-box sleeper"></span> Sleeper</span>
+          </div>
+          <div id="seatGrid" class="seat-grid" role="grid" aria-label="Seat map"></div>
+          <div class="seat-summary">
+            <div><strong>Selected Seats:</strong> <span id="selectedSeatsDisplay">None</span></div>
+            <div><strong>Total Fare:</strong> ৳ <span id="totalFareDisplay">0</span></div>
+          </div>
+          <div class="seat-actions">
+            <button id="confirmBookingBtn" class="btn primary" disabled>Confirm Booking</button>
+          </div>
+          <div id="seatError" class="seat-error" role="alert"></div>
+        </div>
+      </div>
+  </main>
+
+  <script src="search.js?v=20251229"></script>
+  
+</body>
+</html>

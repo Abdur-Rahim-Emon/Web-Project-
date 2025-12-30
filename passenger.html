@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passenger Dashboard</title>
+  <!-- Link to external CSS for styling the passenger dashboard -->
+  <link rel="stylesheet" href="passenger.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+
+  <!-- =========================
+       HEADER / NAVIGATION BAR
+       Contains logo and navigation links
+  ============================ -->
+  <header class="navbar">
+    <div class="logo">Bus Transport Automation </div> <!-- Logo / Brand Name -->
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>    
+        <li><a href="#">Help</a></li>    
+        <li><a href="gps.html" id="gpsTrackingNavLink">GPS Tracking</a></li>
+        <li><a href="#" id="passengerDetailsLink">My Details</a></li>
+        <li><a href="#" id="passengerLogoutLink">Logout</a></li>   <!-- Logout link -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Passenger Details Modal -->
+  <div id="passengerDetailsModal" class="passenger-modal" aria-hidden="true">
+    <div class="passenger-modal-content" role="dialog" aria-modal="true" aria-labelledby="passengerDetailsTitle">
+      <div class="passenger-modal-header">
+        <h2 id="passengerDetailsTitle">Passenger Details</h2>
+        <button type="button" id="passengerDetailsCloseBtn" class="passenger-modal-close">Close</button>
+      </div>
+      <div id="passengerDetailsBody" class="passenger-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- =========================
+       HERO / MAIN SECTION
+       Welcoming message and main options for the passenger
+  ============================ -->
+  <section class="hero">
+    <h1>Welcome Passenger 👋</h1>  <!-- Greeting text -->
+    <p>Select an option below to continue your journey</p> <!-- Subtext -->
+
+    <!-- =========================
+         OPTIONS CARDS
+         Each card has an image, title, description, and onclick function
+    ============================ -->
+    <div class="options">
+
+      <!-- CARD 1: Search Bus -->
+      <div class="card" onclick="openSearch()">
+        <img src="searchLogo.png" alt="Search Bus">
+        <h3>Search Bus</h3>
+        <p>Find available buses by route and date.</p>
+      </div>
+
+      <!-- CARD 2: Bus Counters -->
+      <div class="card" onclick="openRoute()">
+        <img src="gpsLogo.png" alt="Bus Counters">
+        <h3>Bus Counters</h3>
+        <p>Find counter addresses, contacts and timings.</p>
+      </div>
+
+      <!-- CARD 3: See Routes -->
+      <div class="card" onclick="openRoutesList()">
+        <img src="searchLogo.png" alt="See Routes">
+        <h3>See Routes</h3>
+        <p>Browse available routes pulled directly from the database.</p>
+      </div>
+
+    </div>
+
+    <!-- Latest confirmed booking + GPS tracking (shows only if a paid booking exists) -->
+    <section id="latestBookingPanel" class="latest-booking" hidden>
+      <h2 class="latest-booking-title">My Confirmed Booking</h2>
+      <div id="latestBookingMeta" class="latest-booking-meta"></div>
+    </section>
+  </section>
+
+  <!-- =========================
+       FOOTER
+       Contains copyright and developer info
+  ============================ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Bus Transport Automation</div>
+      <div class="footer-meta">© <span id="footerYear"></span> All rights reserved</div>
+      <div class="footer-author">Author: PSTU Student</div>
+    </div>
+  </footer>
+  <script src="footer.js"></script>
+  <script src="passenger.js?v=20251228"></script>
+</body>
+</html>

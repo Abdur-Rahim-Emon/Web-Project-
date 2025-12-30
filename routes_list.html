@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routes — Bus Transport Automation</title>
+  <link rel="stylesheet" href="routes_list.css">
+  <script src="theme.js"></script>
+</head>
+<body class="bg-routes">
+  <header class="navbar">
+    <div class="logo">Bus Transport Automation</div>
+    <nav>
+      <ul>
+        <li><a href="passenger.html">Home</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="routes-container">
+    <section class="routes-panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Live from database</p>
+          <h1>Trips on Routes</h1>
+          <p class="lede">Showing scheduled trips with their routes. Filter by start or end point, or search by route name.</p>
+        </div>
+        <div class="count-pill" id="routesCount">0 trips</div>
+      </div>
+
+      <div class="filters">
+        <label>
+          <span>Start point</span>
+          <select id="startFilter">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label>
+          <span>End point</span>
+          <select id="endFilter">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label class="search-label">
+          <span>Search</span>
+          <input id="routeSearch" type="search" placeholder="Route name, start, or end" />
+        </label>
+      </div>
+
+      <div class="table-wrap">
+        <table class="routes-table" aria-label="Trips list">
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Stops</th>
+              <th>Departure</th>
+              <th>Fare</th>
+              <th>Bus</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="routesBody"></tbody>
+        </table>
+      </div>
+
+      <div class="panel-actions">
+        <a class="back-btn" href="passenger.html">Back</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Bus Transport Automation</div>
+      <div class="footer-meta">© <span id="footerYear"></span> All rights reserved</div>
+      <div class="footer-author">Author: PSTU Student</div>
+    </div>
+  </footer>
+
+  <script src="footer.js"></script>
+  <script src="routes_list.js"></script>
+</body>
+</html>

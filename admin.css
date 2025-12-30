@@ -1,0 +1,168 @@
+/* Layout for sticky footer */
+html, body { height: 100%; }
+body { display:flex; flex-direction:column; min-height:100vh; background: var(--bg, var(--page-bg, #ffffff)); transition: background 300ms ease; color: var(--text, #222); }
+main { flex:1; }
+
+/* Background themes per feature */
+body.bg-search { --page-bg: #f9fafb; }
+body.bg-gps { --page-bg: #f0f9ff; }
+body.bg-bus { --page-bg: #f8f5ff; }
+body.bg-bus-add { --page-bg: #f7fbff; }   /* lighter blue tint for Add form */
+body.bg-bus-list { --page-bg: #fffaf5; }  /* warm tint for List view */
+body.bg-driver { --page-bg: #fff7ed; }
+body.bg-counter { --page-bg: #f0fdf4; }   /* green tint for Counter management */
+/* ===== Manage Buses - Professional UI ===== */
+.bus-subnav { display:flex; gap:8px; margin-bottom:12px; }
+.bus-sub-btn { padding:8px 12px; border:1px solid var(--border, #ddd); background:var(--panel, #f8f9fa); border-radius:6px; cursor:pointer; position:relative; overflow:hidden; }
+.bus-sub-btn.active { background:var(--primary, #0d6efd); color:#fff; border-color:var(--primary, #0d6efd); }
+
+.bus-section { background:var(--panel, #fff); border:1px solid var(--border, #e5e7eb); border-radius:10px; padding:14px; }
+.form-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; }
+.form-field { display:flex; flex-direction:column; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size:0.9rem; color:var(--text, #374151); margin-bottom:6px; }
+.form-field input, .form-field select { padding:10px; border:1px solid var(--border, #d1d5db); border-radius:6px; font-size:0.95rem; background: var(--input-bg, #fff); color: var(--text); }
+.form-field input:focus, .form-field select:focus { outline:none; border-color:var(--primary, #0d6efd); box-shadow:0 0 0 3px rgba(13,110,253,0.15); }
+
+.bus-form-buttons { display:flex; gap:10px; margin-top:8px; }
+.btn { padding:8px 12px; border:1px solid var(--border, #d1d5db); background:var(--panel, #f9fafb); border-radius:6px; cursor:pointer; color: var(--text); }
+.btn.primary { background:var(--primary, #0d6efd); color:#fff; border-color:var(--primary, #0d6efd); }
+.btn.danger { background:#dc3545; color:#fff; border-color:#dc3545; }
+.btn:hover { filter:brightness(0.98); }
+
+/* ===== Interactive Animations ===== */
+.pulse-once { animation: pulseOnce 300ms ease-in-out; }
+@keyframes pulseOnce { 0%{ transform:scale(1); } 50%{ transform:scale(1.04); } 100%{ transform:scale(1); } }
+
+.ripple::after{ content:''; position:absolute; left:50%; top:50%; width:5px; height:5px; background:rgba(13,110,253,0.35); border-radius:50%; transform:translate(-50%,-50%); opacity:0; }
+.ripple.active::after{ animation:ripple 450ms ease-out forwards; }
+@keyframes ripple{ 0%{ opacity:0.6; width:5px; height:5px; } 100%{ opacity:0; width:200px; height:200px; } }
+
+.bus-list-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.toolbar-left { display:flex; gap:8px; align-items:center; }
+.toolbar-right { display:flex; gap:8px; align-items:center; }
+.search-input { padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; }
+
+.data-table { width:100%; border-collapse:collapse; }
+.data-table thead th { text-align:left; background:var(--input-bg, #f3f4f6); color:var(--text, #374151); font-weight:600; padding:10px; border-bottom:1px solid var(--border, #e5e7eb); }
+.data-table tbody td { padding:10px; border-bottom:1px solid var(--border, #f1f5f9); color: var(--text, #222); }
+.data-table tbody tr:hover { background:var(--panel, #f8fafc); }
+.data-table tbody tr.editing { outline:2px solid var(--primary, #0d6efd); }
+
+#busMessages { font-weight:600; }
+
+/* ===== Global Footer ===== */
+.site-footer { margin-top:24px; background:#0f172a; color:#e2e8f0; }
+.site-footer .footer-inner { max-width:1000px; margin:0 auto; padding:14px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.footer-brand { font-weight:700; letter-spacing:0.2px; }
+.footer-meta { opacity:0.85; }
+.footer-author { font-weight:600; }
+/* Global page styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg, #d9efd9);
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styling with title and navigation layout */
+header {
+  background-color: var(--primary, #0cb28c);
+  color: rgb(32, 4, 4);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+header h1 {
+  flex: 1 0 auto;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Navigation buttons styling */
+nav button {
+  margin: 0;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* Active tab button styling */
+nav .tab-btn.active {
+  background-color: var(--primary, #0d6efd);
+  color: var(--text);
+  font-weight: bold;
+  border: 1px solid var(--primary, #0d6efd);
+}
+
+/* Logout button styling */
+nav .logout-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+/* Main content styling */
+main {
+  padding: 20px;
+}
+
+/* Tab content sections (hide/show tabs) */
+.tab-content {
+  display: none;/*not showing anytihing */
+  margin-top: 30px;
+}
+
+.tab-content.active {
+  display: block;/* start on a new line*/
+}
+
+/* Form input fields styling */
+form input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 300px;
+  max-width: 100%;
+}
+
+/* Form buttons styling */
+form button {
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Dynamic lists and search results styling */
+#busList, #driverList, #routeManageList, #searchResults, #routeListView {
+  margin-top: 20px;
+}
+
+/* Routes editable table */
+.routes-form {margin:10px 0; display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.routes-form input {padding:6px 8px; border:1px solid var(--border, #9bc89b); border-radius:6px; font-size:14px; background: var(--input-bg, #fff); color: var(--text, #222);}
+.routes-form button {background:var(--primary, #00a651); color:#fff; border:none; padding:8px 14px; border-radius:6px; cursor:pointer}
+.routes-table-wrapper {overflow-x:auto; margin-top:14px}
+#routesTable {width:100%; border-collapse:collapse; background:var(--panel, #ffffff); border:1px solid var(--border, #b7d9b7)}
+#routesTable th, #routesTable td {border:1px solid var(--border, #cfe8cf); padding:8px 10px; font-size:14px; color: var(--text, #222);}
+#routesTable th {background:var(--input-bg, #e6f7e6); text-align:left}
+#routesTable td .stops-list {display:inline-block; max-width:260px}
+.route-actions button {margin-right:6px; padding:6px 10px; border:none; border-radius:5px; cursor:pointer; font-size:12px}
+.btn-edit {background:var(--primary, #1e90ff); color:#fff}
+.btn-save {background:var(--primary, #00a651); color:#fff}
+.btn-cancel {background:#777; color:#fff}
+.btn-delete {background:#ff4d4d; color:#fff}
+.editing input {width:100%; box-sizing:border-box; padding:4px 6px; border:1px solid #8bbd8b; border-radius:4px; font-size:13px}

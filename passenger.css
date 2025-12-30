@@ -1,0 +1,237 @@
+/* Layout for sticky footer */
+html, body { height: 100%; }
+body { display:flex; flex-direction:column; min-height:100vh; background: var(--page-bg, #ffffff); transition: background 300ms ease; }
+main, .hero { flex:1; }
+
+/* Background themes per feature */
+body.bg-home { --page-bg: #ffffff; }
+body.bg-search { --page-bg: #f1f5f9; }
+body.bg-route { --page-bg: #f0f9ff; }
+body.bg-routes { --page-bg: #f7f9ff; }
+/* ===== Global Footer ===== */
+.site-footer { margin-top:24px; background:#0f172a; color:#e2e8f0; }
+.site-footer .footer-inner { max-width:1000px; margin:0 auto; padding:14px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.footer-brand { font-weight:700; letter-spacing:0.2px; }
+.footer-meta { opacity:0.85; }
+.footer-author { font-weight:600; }
+
+/* ===== Interactive Animations (cards/buttons) ===== */
+.card { transition: transform 200ms ease, box-shadow 200ms ease; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.card.bounce { animation: cardBounce 400ms ease-out; }
+@keyframes cardBounce { 0%{ transform:scale(1); } 30%{ transform:scale(1.03); } 60%{ transform:scale(0.98); } 100%{ transform:scale(1); } }
+/* 
+   GLOBAL STYLES
+   Sets font, background color, and default text color for the page
+ */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text, #222);
+}
+
+/* 
+   NAVBAR / HEADER STYLING
+   Styles the top navigation bar with logo and links
+ */
+.navbar {
+  background-color: var(--primary);          /* Green background */
+  display: flex;                      /* Flex layout for logo + links */
+  justify-content: space-between;     /* Logo on left, links on right */
+  align-items: center;
+  padding: 15px 40px;
+  margin: 10;
+  color: rgb(225, 230, 230);
+}
+/* this is for the titele name */
+.navbar .logo {
+  font-weight: bold;                  
+  font-size: 22px;   
+}
+
+
+/* for the home and logout option */
+.navbar ul {
+  list-style: none;                   /* Remove bullets */
+  display: flex;                      /* Horizontal layout for links */
+  margin: 0;
+  padding: 0;
+}
+/* is just for the space between the home and logout option*/
+.navbar ul li {
+  margin-left: 20px;                  /* Space between links */
+}
+
+.navbar ul li a {
+  color: white;                       /* Link color */
+  text-decoration: none;              /* Remove underline */
+  font-weight: 500;
+}
+
+/* =========================
+   HERO SECTION works on the function search bus etc.
+   Centered welcome message and subtext
+============================ */
+.hero {
+  text-align: center;
+  margin-top: 50px;
+}
+/*  is for the welcome passenger text style*/
+.hero h1 {
+  color: var(--primary);                     /* Green heading */
+  font-size: 28px;
+}
+
+.hero p {
+  font-size: 16px;                     /* Paragraph text size */
+  color: var(--muted);                 /* Theme-aware muted color */
+  margin-bottom: 40px;
+}
+
+/* 
+   OPTIONS CARDS CONTAINER
+   Arranges the action cards horizontally and wraps if needed
+ */
+.options {
+  display: flex;
+  justify-content: center;            /* Center cards */
+  gap: 30px;                          /* Space between cards */
+  flex-wrap: wrap;                    /* Wrap on small screens */
+}
+
+/* 
+   INDIVIDUAL CARD STYLING
+   Styles each clickable card with shadow, padding, and hover effects
+ */
+.card {
+  background: rgb(204, 212, 223);
+  width: 250px;
+  padding: 25px;
+  border-radius: 15px;
+  
+  cursor: pointer;                    /* Pointer cursor on hover */
+  transition: all 0.3s ease;         /* Smooth hover animation */
+  text-align: center;
+}
+
+.card img {
+  width: 60px;                        /* Icon size */
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: var(--primary);                     /* Card title color */
+}
+
+.card p {
+  font-size: 14px;                     /* Description text size */
+  color: var(--muted);                 /* Theme-aware muted text */
+}
+
+/* =========================
+   CARD HOVER EFFECT
+   Slight lift and shadow when user hovers over a card
+============================ */
+.card:hover {
+  transform: translateY(-5px);        /* Lift effect */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Stronger shadow */
+}
+
+/* =========================
+   FOOTER STYLING
+   Centered footer with background color and padding
+============================ */
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 15px;
+  background-color: #00a651;          /* Green footer */
+  color: white;
+}
+
+/* Passenger details modal */
+.passenger-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+.passenger-modal.is-open{ display:flex; }
+
+.passenger-modal-content{
+  width: min(520px, 100%);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.passenger-modal-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.passenger-modal-header h2{
+  margin: 0;
+  color: #00a651;
+  font-size: 18px;
+}
+
+.passenger-modal-close{
+  background: #00a651;
+  color: #ffffff;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.passenger-modal-body{ color: var(--text); }
+
+.passenger-details{ display: grid; gap: 8px; }
+
+.passenger-details-row{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  background: rgb(204, 212, 223);
+  border-radius: 10px;
+}
+
+.passenger-details-key{ font-weight: 700; color: #00a651; }
+.passenger-details-value{ font-weight: 600; color: var(--text); }
+
+/* ===== Latest booking + tracking panel ===== */
+.latest-booking{
+  max-width: 1000px;
+  margin: 34px auto 0;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgb(204, 212, 223);
+  text-align: left;
+}
+
+.latest-booking-title{
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.latest-booking-meta{
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--text);
+  font-weight: 600;
+}

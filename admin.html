@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Link to external CSS for admin dashboard styling -->
+  <link rel="stylesheet" href="admin.css">
+   <script src="theme.js"></script>
+</head>
+<body>
+<!-- =========================
+     HEADER / NAVIGATION
+     Contains page title, tab buttons for different sections, and logout button
+============================ -->
+<header>
+  <h1>Admin Dashboard</h1>
+  <nav>
+    <!-- Tab buttons for passenger view sections -->
+    <button class="tab-btn active" onclick="showTab('searchBusTab')">Search Bus</button>
+    <button class="tab-btn" onclick="showTab('gpsTab')">GPS</button>
+
+    <!-- Tab buttons for admin management sections -->
+    <button class="tab-btn" onclick="showTab('busManageTab')">Manage Buses</button>
+    <button class="tab-btn" onclick="showTab('routeManageTab')">Manage Routes</button>
+    <button class="tab-btn" onclick="showTab('driverManageTab')">Manage Drivers</button>
+    <button class="tab-btn" onclick="showTab('counterManageTab')">Manage Counters</button>
+    <button class="tab-btn" onclick="showTab('tripManageTab')">Manage Trips</button>
+    <button class="tab-btn" onclick="showTab('reportTab')">Report</button>
+
+    <!-- Logout button -->
+    <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+  </nav>
+</header>
+
+<main>
+  <!-- =========================
+       PASSENGER VIEW TABS
+       Sections visible for admin to check passenger-related info
+  ============================ -->
+
+  <!-- Search Bus Tab -->
+  <section id="searchBusTab" class="tab-content active">
+    <h2>Search Buses</h2>
+    <input type="text" placeholder="Enter bus number or destination" id="searchBusInput">
+    <button onclick="searchBus()">Search</button>
+    <div id="searchResults"></div> <!-- Displays search results -->
+  </section>
+
+
+  <!-- GPS Tracking Tab -->
+  <section id="gpsTab" class="tab-content">
+    <h2>GPS Tracking</h2>
+    <p>Bus GPS map placeholder (you can integrate Google Maps here later)</p>
+  </section>
+
+  <!-- =========================
+       ADMIN MANAGEMENT TABS
+       Sections where admin can add/update buses, drivers, and routes
+  ============================ -->
+
+  <!-- Manage Buses Tab -->
+  <section id="busManageTab" class="tab-content">
+    <h2>Manage Buses</h2>
+    <div class="bus-subnav">
+      <button type="button" class="bus-sub-btn active" onclick="showBusSection('busAddSection')">➕ Add New Bus</button>
+      <button type="button" class="bus-sub-btn" onclick="showBusSection('busListSection')">📋 Show All Buses</button>
+    </div>
+
+    <!-- Add / Edit Bus Section -->
+    <div id="busAddSection" class="bus-section active">
+      <form id="busForm" class="form-grid">
+        <input type="hidden" id="busId">
+        <div class="form-field">
+          <label for="busNumber">Bus Number</label>
+          <input type="text" id="busNumber" placeholder="e.g., BL100" required>
+        </div>
+        <div class="form-field">
+          <label for="busType">Type</label>
+          <select id="busType" required>
+            <option value="">Select type</option>
+            <option>AC</option>
+            <option>Non-AC</option>
+            <option>Luxury</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="busCapacity">Capacity</label>
+          <input type="number" id="busCapacity" placeholder="e.g., 40" min="10" max="80" required>
+        </div>
+        <div class="form-field full">
+          <label for="busCondition">Condition</label>
+          <input type="text" id="busCondition" placeholder="e.g., Excellent / Good / Fair" required>
+        </div>
+        <div class="bus-form-buttons">
+          <button type="button" class="btn primary" id="busSaveBtn" onclick="saveBus()">Add Bus</button>
+          <button type="button" class="btn" onclick="resetBusForm()">Clear</button>
+          <button type="button" class="btn danger" id="busDeleteBtn" style="display:none" onclick="deleteSelectedBus()">Delete Bus</button>
+        </div>
+      </form>
+      <div style="margin-top:8px">
+        <button type="button" onclick="seedSampleBuses()">Seed Sample Buses</button>
+      </div>
+      <div id="busMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+    </div>
+
+    <!-- Bus List Section -->
+    <div id="busListSection" class="bus-section" style="display:none">
+      <div class="bus-list-toolbar">
+        <div class="toolbar-left">
+          <input type="text" id="busListSearch" class="search-input" placeholder="Search by number or type">
+          <button type="button" class="btn" onclick="applyBusSearch()">Search</button>
+          <button type="button" class="btn" onclick="clearBusSearch()">Clear</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="btn" onclick="manualLoadBuses()">Refresh</button>
+        </div>
+      </div>
+      <div id="busTableWrapper">
+        <table id="busTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Number</th>
+              <th>Type</th>
+              <th>Capacity</th>
+              <th>Condition</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="busTbody"><!-- dynamic rows --></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em;color:#555;margin-top:6px">Click a row to edit or delete the bus.</p>
+    </div>
+  </section>
+
+  <!-- Manage Routes Tab -->
+  <section id="routeManageTab" class="tab-content">
+    <h2>Manage Routes</h2>
+    <div class="bus-subnav">
+      <button type="button" class="bus-sub-btn active" onclick="showRouteSection('routeAddSection')">➕ Add New Route</button>
+      <button type="button" class="bus-sub-btn" onclick="showRouteSection('routeListSection')">📋 Show All Routes</button>
+    </div>
+
+    <!-- Add / Edit Route Section -->
+    <div id="routeAddSection" class="bus-section active">
+      <form id="routeForm" class="form-grid">
+        <input type="hidden" id="routeId">
+        <div class="form-field">
+          <label for="routeName">Route Name</label>
+          <input type="text" id="routeName" placeholder="e.g., Dhaka-Chittagong" required>
+        </div>
+        <div class="form-field">
+          <label for="routeStart">Start Point</label>
+          <input type="text" id="routeStart" placeholder="e.g., Dhaka" required>
+        </div>
+        <div class="form-field">
+          <label for="routeEnd">End Point</label>
+          <input type="text" id="routeEnd" placeholder="e.g., Chittagong" required>
+        </div>
+        <div class="form-field full">
+          <label for="routeStops">Stops (comma separated)</label>
+          <input type="text" id="routeStops" placeholder="e.g., Dhaka, Narayanganj, Cumilla, Feni, Chittagong" required>
+        </div>
+        <div class="form-field">
+          <label for="routeBusId">Bus ID (optional)</label>
+          <input type="number" id="routeBusId" min="1" placeholder="e.g., 1">
+        </div>
+        <div class="form-field">
+          <label for="routeDistance">Distance (km)</label>
+          <input type="number" step="0.01" id="routeDistance" placeholder="e.g., 250">
+        </div>
+        <div class="form-field">
+          <label for="routeDuration">Duration (minutes)</label>
+          <input type="number" id="routeDuration" placeholder="e.g., 255">
+        </div>
+
+        <div class="bus-form-buttons">
+          <button type="button" class="btn primary" id="routeSaveBtn" onclick="saveRouteAdmin()">Add Route</button>
+          <button type="button" class="btn" onclick="resetRouteForm()">Clear</button>
+          <button type="button" class="btn danger" id="routeDeleteBtn" style="display:none" onclick="deleteSelectedRoute()">Delete Route</button>
+        </div>
+      </form>
+      <div id="routeMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+    </div>
+
+    <!-- Route List Section -->
+    <div id="routeListSection" class="bus-section" style="display:none">
+      <div class="bus-list-toolbar">
+        <div class="toolbar-left">
+          <input type="text" id="routeListSearch" class="search-input" placeholder="Search by name, start or end point">
+          <button type="button" class="btn" onclick="applyRouteSearch()">Search</button>
+          <button type="button" class="btn" onclick="clearRouteSearch()">Clear</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="btn" onclick="manualLoadRoutes()">Refresh</button>
+        </div>
+      </div>
+      <div id="routeTableWrapper">
+        <table id="routeTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Distance (km)</th>
+              <th>Duration (min)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="routeTbody"><!-- dynamic rows --></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em;color:#555;margin-top:6px">Click a row to edit or delete the route.</p>
+    </div>
+  </section>
+
+  <!-- Manage Counters Tab -->
+  <section id="counterManageTab" class="tab-content">
+    <h2>Manage Counters</h2>
+    <div class="bus-subnav">
+      <button type="button" class="bus-sub-btn active" onclick="showCounterSection('counterAddSection')">➕ Add New Counter</button>
+      <button type="button" class="bus-sub-btn" onclick="showCounterSection('counterListSection')">📋 Show All Counters</button>
+    </div>
+
+    <!-- Add / Edit Counter Section -->
+    <div id="counterAddSection" class="bus-section active">
+      <form id="counterForm" class="form-grid">
+        <input type="hidden" id="counterId">
+        <div class="form-field">
+          <label for="counterName">Counter Name</label>
+          <input type="text" id="counterName" placeholder="e.g., Gabtoli Counter" required>
+        </div>
+        <div class="form-field">
+          <label for="counterDistrict">District</label>
+          <input type="text" id="counterDistrict" placeholder="e.g., Dhaka" required>
+        </div>
+        <div class="form-field full">
+          <label for="counterAddress">Address</label>
+          <input type="text" id="counterAddress" placeholder="Full address" required>
+        </div>
+        <div class="form-field">
+          <label for="counterPhone">Contact Number</label>
+          <input type="text" id="counterPhone" placeholder="Primary phone" required>
+        </div>
+        <div class="form-field">
+          <label for="counterAltPhone">Alternate Contact</label>
+          <input type="text" id="counterAltPhone" placeholder="Optional">
+        </div>
+        <div class="form-field">
+          <label for="counterEmail">Email</label>
+          <input type="email" id="counterEmail" placeholder="Optional">
+        </div>
+        <div class="form-field">
+          <label for="counterOpen">Opening Time</label>
+          <input type="time" id="counterOpen">
+        </div>
+        <div class="form-field">
+          <label for="counterClose">Closing Time</label>
+          <input type="time" id="counterClose">
+        </div>
+        <div class="form-field">
+          <label for="counterStatus">Status</label>
+          <select id="counterStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="bus-form-buttons">
+          <button type="button" class="btn primary" id="counterSaveBtn" onclick="saveCounter()">Add Counter</button>
+          <button type="button" class="btn" onclick="resetCounterForm()">Clear</button>
+          <button type="button" class="btn danger" id="counterDeleteBtn" style="display:none" onclick="deleteSelectedCounter()">Delete Counter</button>
+        </div>
+      </form>
+      <div id="counterMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+    </div>
+
+    <!-- Counter List Section -->
+    <div id="counterListSection" class="bus-section" style="display:none">
+      <div class="bus-list-toolbar">
+        <div class="toolbar-left">
+          <input type="text" id="counterListSearch" class="search-input" placeholder="Search by name, district or phone">
+          <button type="button" class="btn" onclick="applyCounterSearch()">Search</button>
+          <button type="button" class="btn" onclick="clearCounterSearch()">Clear</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="btn" onclick="manualLoadCounters()">Refresh</button>
+        </div>
+      </div>
+      <div id="counterTableWrapper">
+        <table id="counterTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>District</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Alt</th>
+              <th>Email</th>
+              <th>Open</th>
+              <th>Close</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="counterTbody"><!-- dynamic rows --></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em;color:#555;margin-top:6px">Click a row to edit or delete the counter.</p>
+    </div>
+  </section>
+
+  <!-- Manage Drivers Tab -->
+  <section id="driverManageTab" class="tab-content">
+    <h2>Manage Drivers</h2>
+    <div class="bus-subnav">
+      <button type="button" class="bus-sub-btn active" onclick="showDriverSection('driverAddSection')">➕ Add New Driver</button>
+      <button type="button" class="bus-sub-btn" onclick="showDriverSection('driverListSection')">📋 Show All Drivers</button>
+    </div>
+
+    <!-- Add / Edit Driver Section -->
+    <div id="driverAddSection" class="bus-section active">
+      <form id="driverForm" class="form-grid">
+        <input type="hidden" id="driverId">
+        <div class="form-field">
+          <label for="driverName">Driver Name</label>
+          <input type="text" id="driverName" placeholder="e.g., John Doe" required>
+        </div>
+        <div class="form-field">
+          <label for="driverLicenseNumber">License Number</label>
+          <input type="text" id="driverLicenseNumber" placeholder="e.g., LIC-12345" required>
+        </div>
+        <div class="form-field">
+          <label for="driverPhone">Phone Number</label>
+          <input type="text" id="driverPhone" placeholder="e.g., 01234-567890" required>
+        </div>
+        <div class="form-field">
+          <label for="driverActive">Active</label>
+          <select id="driverActive">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+        <div class="bus-form-buttons">
+          <button type="button" class="btn primary" id="driverSaveBtn" onclick="saveDriver()">Add Driver</button>
+          <button type="button" class="btn" onclick="resetDriverForm()">Clear</button>
+          <button type="button" class="btn danger" id="driverDeleteBtn" style="display:none" onclick="deleteSelectedDriver()">Delete Driver</button>
+        </div>
+      </form>
+      <div id="driverMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+    </div>
+
+    <!-- Driver List Section -->
+    <div id="driverListSection" class="bus-section" style="display:none">
+      <div class="bus-list-toolbar">
+        <div class="toolbar-left">
+          <input type="text" id="driverListSearch" class="search-input" placeholder="Search by name or license number">
+          <button type="button" class="btn" onclick="applyDriverSearch()">Search</button>
+          <button type="button" class="btn" onclick="clearDriverSearch()">Clear</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="btn" onclick="manualLoadDrivers()">Refresh</button>
+        </div>
+      </div>
+      <div id="driverTableWrapper">
+        <table id="driverTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>License Number</th>
+              <th>Phone</th>
+              <th>Active</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="driverTbody"><!-- dynamic rows --></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em;color:#555;margin-top:6px">Click a row to edit or delete the driver.</p>
+    </div>
+  </section>
+
+  <!-- Manage Trips Tab -->
+  <section id="tripManageTab" class="tab-content">
+    <h2>Manage Trips</h2>
+    <div class="bus-subnav">
+      <button type="button" class="bus-sub-btn active" onclick="showTripSection('tripAddSection')">➕ Add New Trip</button>
+      <button type="button" class="bus-sub-btn" onclick="showTripSection('tripListSection')">📋 Show All Trips</button>
+    </div>
+
+    <!-- Add / Edit Trip Section -->
+    <div id="tripAddSection" class="bus-section active">
+      <form id="tripForm" class="form-grid">
+        <input type="hidden" id="tripId">
+        <div class="form-field">
+          <label for="tripBusId">Bus ID</label>
+          <select id="tripBusId" required>
+            <option value="">Select bus</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="tripRouteId">Route ID</label>
+          <select id="tripRouteId" required>
+            <option value="">Select route</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="tripDriverId">Driver ID</label>
+          <select id="tripDriverId">
+            <option value="">Unassigned</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="tripDeparture">Departure Date &amp; Time</label>
+          <input type="datetime-local" id="tripDeparture" required>
+        </div>
+        <div class="form-field">
+          <label for="tripArrival">Estimated Arrival</label>
+          <input type="datetime-local" id="tripArrival">
+        </div>
+        <div class="form-field">
+          <label for="tripBaseFare">Base Fare</label>
+          <input type="number" step="0.01" id="tripBaseFare" placeholder="e.g., 500" required>
+        </div>
+        <div class="form-field">
+          <label for="tripStatus">Status</label>
+          <select id="tripStatus">
+            <option value="scheduled">Scheduled</option>
+            <option value="enroute">Enroute</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="bus-form-buttons">
+          <button type="button" class="btn primary" id="tripSaveBtn" onclick="saveTrip()">Add Trip</button>
+          <button type="button" class="btn" onclick="resetTripForm()">Clear</button>
+          <button type="button" class="btn danger" id="tripDeleteBtn" style="display:none" onclick="deleteSelectedTrip()">Delete Trip</button>
+        </div>
+      </form>
+      <div id="tripMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+    </div>
+
+    <!-- Trip List Section -->
+    <div id="tripListSection" class="bus-section" style="display:none">
+      <div class="bus-list-toolbar">
+        <div class="toolbar-left">
+          <input type="text" id="tripListSearch" class="search-input" placeholder="Search by route, bus or status">
+          <button type="button" class="btn" onclick="applyTripSearch()">Search</button>
+          <button type="button" class="btn" onclick="clearTripSearch()">Clear</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="btn" onclick="manualLoadTrips()">Refresh</button>
+        </div>
+      </div>
+      <div id="tripTableWrapper">
+        <table id="tripTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Bus</th>
+              <th>Route</th>
+              <th>Departure</th>
+              <th>Arrival</th>
+              <th>Fare</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tripTbody"><!-- dynamic rows --></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em;color:#555;margin-top:6px">Click a row to edit or delete the trip.</p>
+    </div>
+  </section>
+
+  <!-- Report Tab -->
+  <section id="reportTab" class="tab-content">
+    <h2>Report</h2>
+    <p>Generate and export a report (PDF) or print.</p>
+
+    <div class="bus-form-buttons" style="margin:10px 0">
+      <button type="button" class="btn primary" onclick="downloadAdminReportPdf()">Download PDF</button>
+      <button type="button" class="btn" onclick="printAdminReport()">Print</button>
+    </div>
+
+    <!-- Report content is generated by admin.js -->
+    <div id="adminReportContent" style="background:var(--panel);color:var(--text);padding:12px;border-radius:10px;overflow:auto"></div>
+    <div id="reportMessages" style="margin-top:8px;color:#c00;font-size:0.9em"></div>
+  </section>
+
+</main>
+
+<!-- =========================
+     LINK EXTERNAL JAVASCRIPT
+     Handles tab switching, add/update functions, search, and logout
+============================ -->
+<script src="footer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="admin.js"></script>
+
+<!-- Footer injected by footer.js -->
+</body>
+</html>

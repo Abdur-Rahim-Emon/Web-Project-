@@ -1,0 +1,34 @@
+/* Route/Counters page styles — match passenger theme */
+body{font-family:'Poppins', Arial, sans-serif;background:var(--bg);margin:0;color:var(--text,#222)}
+.navbar{background-color:var(--primary);display:flex;justify-content:space-between;align-items:center;padding:12px 24px;color:#fff}
+.navbar .logo{font-weight:700}
+.navbar ul{list-style:none;margin:0;padding:0;display:flex}
+.navbar ul li{margin-left:18px}
+.navbar ul li a{color:white;text-decoration:none}
+
+.route-container{max-width:1100px;margin:20px auto;display:grid;grid-template-columns:1fr 360px;gap:18px;padding:0 16px}
+.map-area{background:#fff;border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+.map-placeholder{border-radius:8px;background:linear-gradient(180deg,#e6f7e6,#ffffff);display:block;color:#0b662e;font-weight:700;font-size:16px;border:2px dashed rgba(0,0,0,0.06)}
+.map-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filter-row select,.filter-row input{padding:8px 10px;border:1px solid #dcdcdc;border-radius:8px;outline:none}
+
+.route-panel{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+.route-panel h2{margin-top:0;color:var(--primary)}
+.panel-actions{margin-top:12px}
+.back-btn{display:inline-block;padding:8px 12px;background:var(--primary);color:white;border-radius:8px;text-decoration:none}
+
+/* Counters table */
+.counters-table{width:100%;border-collapse:collapse;margin-top:8px}
+.counters-table th,.counters-table td{border:1px solid #e6e9ef;padding:8px;font-size:14px;vertical-align:top}
+.counters-table th{background:#f6fff6;color:var(--primary)}
+.counters-table tr:nth-child(even){background:#fbfffb}
+
+footer{margin:20px auto 40px;text-align:center;color:var(--muted)}
+
+@media (max-width:900px){
+  .route-container{grid-template-columns:1fr}
+  .route-panel{order:2}
+  .map-area{order:1}
+}

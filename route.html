@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bus Counters — Bus Transport Automation</title>
+  <link rel="stylesheet" href="route.css">
+   <script src="theme.js"></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Bus Transport Automation</div>
+    <nav>
+      <ul>
+        <li><a href="passenger.html">Home</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="route-container">
+    <section class="map-area">
+      <div class="map-placeholder" style="height:auto; padding:12px">
+        <div class="filter-row">
+          <label for="districtFilter"><strong>Filter by district:</strong></label>
+          <select id="districtFilter">
+            <option value="">All</option>
+          </select>
+          <label for="searchBox" style="margin-left:12px"><strong>Search:</strong></label>
+          <input id="searchBox" type="text" placeholder="Counter name or address" />
+        </div>
+        <div class="map-note">Showing bus counters from the database</div>
+      </div>
+
+      <h2 id="route-title">Bus Counters</h2>
+
+      <table class="counters-table" aria-label="Bus counters list">
+        <thead>
+          <tr>
+            <th>Counter Name</th>
+            <th>Address</th>
+            <th>District</th>
+            <th>Contact</th>
+            <th>Alt. Contact</th>
+            <th>Email</th>
+            <th>Opening</th>
+            <th>Closing</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="countersBody"></tbody>
+      </table>
+
+      <div class="panel-actions">
+        <a class="back-btn" href="passenger.html">Back</a>
+      </div>
+    </section>
+
+    <aside class="route-panel">
+      
+    </aside>
+  </main>
+  <script src="route.js"></script>
+</body>
+</html>

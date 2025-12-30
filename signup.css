@@ -1,0 +1,142 @@
+/* Page layout and background */
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+}
+
+/* Page title styling */
+#title {
+  background-color: var(--primary);
+  color: rgb(18, 1, 1);
+  text-align: center;
+  padding: 15px 0;
+  font-size: 28px;
+  width: 100%;
+}
+
+/* Centers the signup form box */
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Signup form box design */
+.container {
+  background: var(--panel, rgb(225, 231, 228));
+  padding: 40px;
+  width: 450px; /* Form size */
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Logo image styling */
+.logo {
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+/* Headings inside the form */
+h2 {
+  margin-bottom: 5px;
+}
+
+/* Paragraph text below heading */
+p {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Align form items to left */
+.form {
+  text-align: left;
+}
+
+/* Two-column layout for name fields */
+.form-row {
+  display: flex;
+  justify-content: space-between;// it means in the size of div two div positoin fit perfectly and all the div 
+  // are equally spaced
+}
+
+/* Each column takes half width */
+.col {
+  width: 48%;// the form belongs to div in the dive width 48% it takes
+}
+
+/* Label and input styling  for the password and confirm pasword
+*/
+label {
+  display: inline-block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+}
+
+/* Text, email, and password input boxes 
+box style applied
+*/
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Gender section layout */
+.gender-box {
+  display: flex;
+  gap: 50px;// space between the gender option 
+  margin-bottom: 10px;
+}
+
+/* Space between radio button and label text */
+.gender-box input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Forgot password and link section */
+.actions {
+  text-align: right;
+  margin: 10px 0;
+}
+
+/* Link color and style */
+.actions a,
+.back-login a {
+  color: var(--primary);
+ 
+  font-size: 13px;
+}
+
+.actions a:hover,
+.back-login a:hover {
+  text-decoration: underline;
+}
+
+/* Signup button styling */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+ /* after clcking the sing up button changing the color */
+.login-btn:hover {
+  background: #bb0d3e;
+}
+
+/* Back to login text design */
+.back-login {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+}

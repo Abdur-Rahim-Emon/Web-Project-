@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPS Tracking — Bus Transport Automation</title>
+  <link rel="stylesheet" href="gps.css">
+  <!-- Leaflet (no API key needed) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+   <script src="theme.js"></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Bus Transport Automation</div>
+    <nav>
+      <ul>
+        <li><a href="passenger.html">Home</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="gps-container">
+    <section class="map-wrapper">
+      <div id="map" class="map"></div>
+      <div class="map-note">Live tracking simulated.</div>
+    </section>
+
+    <aside class="info-panel">
+      <h2>Live Bus Tracking</h2>
+      <p id="route-label">Route: —</p>
+      <div class="status">
+        <p><strong>Current Speed:</strong> <span id="speed">0 km/h</span></p>
+        <p><strong>Last Update:</strong> <span id="last-update">—</span></p>
+        <p><strong>Next Stop:</strong> <span id="next-stop">N/A</span></p>
+      </div>
+      <h3>Upcoming Stops</h3>
+      <ul id="stop-list" class="stop-list"></ul>
+      <div class="panel-actions">
+        <a class="back" href="passenger.html">Back to Dashboard</a>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="footer.js"></script>
+  <script src="gps.js?v=20251229"></script>
+</body>
+</html>

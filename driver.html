@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Dashboard</title>
+  <link rel="stylesheet" href="driver.css">
+  <script src="theme.js"></script>
+  <script defer src="driver.js"></script>
+  <script defer src="footer.js"></script>
+  </head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Bus Transport Automation</div>
+    <nav>
+      <ul>
+        <li><a href="#" id="driverLogoutLink">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 id="driverWelcome">Welcome Driver 👋</h1>
+    <p>Here are your assigned trips.</p>
+  </section>
+
+  <main class="content">
+    <div class="panel">
+      <div class="tabbar" role="tablist">
+        <button class="tab-btn active" id="tabActive" data-target="tab-active" aria-selected="true">Trips</button>
+        <button class="tab-btn" id="tabCompleted" data-target="tab-completed" aria-selected="false">Completed Trips</button>
+        <button class="tab-btn" id="tabRoutes" data-target="tab-routes" aria-selected="false">Routes</button>
+      </div>
+
+      <section id="tab-active" class="tab-panel active" role="tabpanel" aria-labelledby="tabActive">
+        <div class="panel-header">
+          <div>
+            <h2>Your Trips</h2>
+            <p class="muted">Mark a trip as done to move it into Completed.</p>
+          </div>
+        </div>
+        <div class="table-block">
+          <div class="block-heading">
+            <h3>Active Trips</h3>
+            <span class="pill" id="activeCount">0</span>
+          </div>
+          <div id="activeTrips" class="table-wrapper">
+            <div class="loading">Loading trips...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-completed" class="tab-panel" role="tabpanel" aria-labelledby="tabCompleted">
+        <div class="panel-header">
+          <div>
+            <h2>Completed Trips</h2>
+            <p class="muted">Trips you marked done.</p>
+          </div>
+        </div>
+        <div class="table-block">
+          <div class="block-heading">
+            <h3>Completed Trips</h3>
+            <span class="pill" id="completedCount">0</span>
+          </div>
+          <div id="completedTrips" class="table-wrapper">
+            <div class="loading">Loading trips...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-routes" class="tab-panel" role="tabpanel" aria-labelledby="tabRoutes">
+        <div class="panel-header">
+          <div>
+            <h2>Routes</h2>
+            <p class="muted">Routes assigned to you.</p>
+          </div>
+        </div>
+        <div class="table-block">
+          <div class="block-heading">
+            <h3>Your Assigned Routes</h3>
+            <span class="pill" id="routesCount">0</span>
+          </div>
+          <div id="routesContainer" class="table-wrapper">
+            <div class="loading">Loading routes...</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Bus Transport Automation</div>
+      <div class="footer-meta">© <span id="footerYear"></span> All rights reserved</div>
+      <div class="footer-author">Author: PSTU Student</div>
+    </div>
+  </footer>
+
+</body>
+</html>
