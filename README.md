@@ -35,7 +35,7 @@ Web-Project-/
 
 ---
 
-### 5. Technologies Used
+###  Technologies Used
 
 ## Technologies Used
 - HTML
